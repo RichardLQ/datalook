@@ -1,0 +1,78 @@
+/* 禁用iPhone中Safari的字号自动调整 */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* 解决IOS默认滑动很卡的情况 */
+  -webkit-overflow-scrolling : touch;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+}
+/* 禁止缩放表单 */
+input[type="submit"], input[type="reset"], input[type="button"], input {
+  resize: none;
+  border: none;
+  border:0;
+  outline:none;
+}
+.home{
+  background-color: #f0f2f5;
+  // width:100%;
+  height: 100%;
+}
+.product{
+    width:100%;
+    height:100%;
+    padding: 0 0 0 200px;
+  }
+  .left{
+    position: fixed;
+    // top: 10px;
+    left: 0;
+    z-index: 100;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 4px 4px 40px rgba(0,0,0,.05);
+  }
+  li{
+    list-style: none;
+  }
+  .btns{
+    text-align:right;
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #ebeef5;
+  }
+  .btnTitle{
+    display: inline-block;
+    line-height: 40px;
+  }
+  // .btns>span{
+  //   margin-left: 10px;
+  //   margin-top: 20px;
+  //   line-height: 40px;
+  // }
+  /deep/ .el-drawer:focus {
+    outline: none; 
+}
+/deep/ .el-drawer__wrapper:focus {
+  outline: none; 
+}
+/deep/.el-drawer__container{
+  outline: none; 
+}
+/deep/.el-drawer__wrapper{
+  z-index: 0 !important;
+}
+.el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled) {
+   box-shadow: 0 !important;
+}
+.fixeds{
+  position: fixed;
+  left: 5px;
+  bottom: 10px;
+}
+
+  
