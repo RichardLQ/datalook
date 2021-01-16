@@ -32,7 +32,7 @@
         :show-close="false"
         :wrapperClosable="false"
         >
-        <div style="margin-top:100px">
+        <div style="margin-top:20px">
           <router-view @filterParameters="filterParameters"></router-view> 
         </div>
       </el-drawer>

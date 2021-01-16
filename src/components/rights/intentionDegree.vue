@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div style="width:100%;height:10px"></div>
         <el-form  :model="form" ref="form" label-width="80px">                    
             <el-form-item label="专家" class="label" >
                 <template>

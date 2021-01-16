@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div style="width:100%;height:10px"></div>
       <el-form :model="form"  ref="form" label-width="80px" @submit.native.prevent>
                         <el-form-item label="空间" class="label" >
                             <el-checkbox-group v-model="form.data_type">
