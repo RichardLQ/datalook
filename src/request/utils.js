@@ -1,3 +1,4 @@
+import { channelList} from '@/request/api';
 export default {
     //获取用户信息
     getAuthName:function() {
@@ -30,4 +31,12 @@ export default {
         day=(day<9)?('0'+day):day;
         return [year+'-'+month+'-01',year+'-'+month+'-'+day];
     },
+    login:function(){
+        channelList().then(res=>{
+            if(res.indexOf('请登录')!=-1){
+                return false;
+            }
+        })
+        return false;
+    }
 }
