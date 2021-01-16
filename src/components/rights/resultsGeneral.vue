@@ -30,6 +30,7 @@
     </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue,Emit  } from 'vue-property-decorator';
 @Component({
   components: {}

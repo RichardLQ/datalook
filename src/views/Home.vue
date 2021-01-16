@@ -13,8 +13,11 @@
         </div>
     </div>
       <template>
-           <draggable ref="draggable" @onActivated="onActivated"  @closeDraggable="closeDraggable" @openDraggable="openDraggable" @onResize="onResize" @onDragStop="onDragStop" :parentValue="item.childrenValue" v-for="(item,index) in elements" :key="index"></draggable>     
-       
+        <div>
+            
+            <draggable ref="draggable" @onActivated="onActivated"  @closeDraggable="closeDraggable" @openDraggable="openDraggable" @onResize="onResize" @onDragStop="onDragStop" :parentValue="item.childrenValue" v-for="(item,index) in elements" :key="index"></draggable>     
+        
+        </div>
       </template>
       <div style="width:30% !important">
         <el-drawer
@@ -37,6 +40,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue  } from 'vue-property-decorator';
 
 import toobar from "../components/toobars/leftsides"; 

@@ -123,6 +123,7 @@
 </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue } from 'vue-property-decorator';
 import { getProRecordData} from '@/request/api';
 @Component({

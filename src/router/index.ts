@@ -1,8 +1,8 @@
+// @ts-nocheck
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import resultsGeneral from '../components/rights/resultsGeneral.vue'//业绩通史数据
-import resultsGeneralData from '../components/conents/resultsGeneralTable.vue'//业绩通史数据表格
 import oneDay from '../components/rights/oneDay.vue'//组员一日数据
 // import oneDayData from '../components/conents/oneDayData.vue'//组员一日数据表格
 import trackGradient from '../components/rights/trackGradient.vue'//组员跟踪梯度

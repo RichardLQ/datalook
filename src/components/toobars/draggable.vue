@@ -1,6 +1,20 @@
 <template>
     <div>
-       <vue-draggable-resizable class="draggables" @activated="onActivated"  class-name-active="my-active-class" @resizing="onResize" @dragstop="onDragStop" :z="parentValue.zindex" :x="parentValue.pageX" :y="parentValue.pageY" :w="parentValue.pageW" :h="parentValue.pageH">
+        <!-- <vue-draggable-resizable @activated="onActivated"  class-name-active="my-active-class" @resizing="onResize" @dragstop="onDragStop" style="border: 1px solid black;" :drag-handle="'.drag-handle'" :z="parentValue.zindex" :x="parentValue.pageX" :y="parentValue.pageY" :w="parentValue.pageW" :h="parentValue.pageH">
+            <div class="drag-handle  btns">
+                <div class="btnTitle" style="display:inline-block">{{parentValue.name}}</div>
+                    <div class="btnSet">
+                        <el-button type="primary" v-if="download" icon="el-icon-download" circle title="导出文件" @click.stop="exportFile()"></el-button>
+                        <el-button type="primary" icon="el-icon-edit" @click.stop="openDraggable(parentValue.id)" circle title="设置参数"></el-button>
+                        <el-button type="info" icon="el-icon-close" circle title="关闭" @click.stop="closeDraggable(parentValue.id)"></el-button>    
+                    </div>  
+            </div>
+            <keep-alive>
+                <component ref="results" :is="getComponents"></component>
+            </keep-alive>
+        </vue-draggable-resizable> -->
+
+       <vue-draggable-resizable class="draggables" @activated="onActivated"  class-name-active="my-active-class" :drag-handle="'.drag-handle'" @resizing="onResize" @dragstop="onDragStop" :z="parentValue.zindex" :x="parentValue.pageX" :y="parentValue.pageY" :w="parentValue.pageW" :h="parentValue.pageH">
             <div class="drag-handle btns">
                     <div class="btnTitle" style="display:inline-block">{{parentValue.name}}</div>
                     <div class="btnSet">
@@ -17,6 +31,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { Component, Prop, Vue, Emit  } from 'vue-property-decorator';
 import resultsGeneralTable from '../conents/resultsGeneralTable.vue'//业绩通识数据面板
 import oneDayTable from '../conents/oneDayTable.vue'//组员一日数据表格

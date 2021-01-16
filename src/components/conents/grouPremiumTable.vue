@@ -46,6 +46,7 @@
 </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue } from 'vue-property-decorator';
 import { wxgroup} from '@/request/api';
 @Component({

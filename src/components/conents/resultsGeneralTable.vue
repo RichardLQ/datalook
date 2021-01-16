@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue } from 'vue-property-decorator';
 import { resultsGeneral} from '@/request/api';
 @Component({

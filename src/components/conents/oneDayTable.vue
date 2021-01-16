@@ -70,6 +70,7 @@
 </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue } from 'vue-property-decorator';
 import { getProfessorData} from '@/request/api';
 @Component({

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <u-table ref="table1"  v-if="testdata.length > 0" border :data="testdata"  v-loading="loading" :show-summary='true' use-virtual :height="heights" :row-height="40" :cell-style="{padding: '0'}" 
+    <u-table ref="table1" :summary-method="summaryMethod"  v-if="testdata.length > 0" border :data="testdata"  v-loading="loading" :show-summary='true' use-virtual :height="heights" :row-height="40" :cell-style="{padding: '0'}" 
 			
 			class="elTable"
 			stripe>
@@ -51,12 +51,13 @@
 </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { Component, Vue } from 'vue-property-decorator';
 import { getChannelData} from '@/request/api';
 @Component({
   components: {},
   filters: {
-      formatName:function(val: any){
+        formatName:function(val){
 				if(typeof val['name']=='object'){
 					return val['nickname'];
 				}else{
@@ -77,7 +78,7 @@ export default class ChannelPerformanceTable extends Vue {
 	map={};
     export_url={};
     public getData(): void {
-        const map = {};
+        // const map = {};
         this.loading=true;
 		Object.assign(this.map,this.$store.state.nowFilters.channelPerformance)
         getChannelData(this.map).then(res => {
@@ -92,6 +93,40 @@ export default class ChannelPerformanceTable extends Vue {
             })
         })
 	}
+
+	public summaryMethod({ columns, data }) {
+           
+           const means = [] // 合计
+           columns.forEach((column, columnIndex) => {
+               if (columnIndex === 0) {
+                   means.push('合计')
+               } else {
+                   const values = data.map(item => Number(item[column.property]));
+                   // 合计
+                   if (!values.every(value => isNaN(value))) {
+                       means[columnIndex] = values.reduce((prev, curr) => {
+                           const value = Number(curr);
+                           if (!isNaN(value)) {
+                               return prev + curr;
+                           } else {
+                               return prev;
+                           }
+                        }, 0);
+                        if(columnIndex==2){
+							means[columnIndex] =  means[columnIndex].toFixed(2) +' ';
+                        }else{
+                            means[columnIndex] =  means[columnIndex].toFixed(2) + ' ';
+                        }
+                       
+                   } else {
+                       means[columnIndex] = 'N/A';
+                   }
+                   
+               }
+           })
+           // 返回一个二维数组的表尾合计(不要平均值，你就不要在数组中添加)
+           return [means]
+       }
 
 	/**
      * exportFile
