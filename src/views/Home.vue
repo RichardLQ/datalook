@@ -32,7 +32,9 @@
         :show-close="false"
         :wrapperClosable="false"
         >
-        <router-view @filterParameters="filterParameters"></router-view> 
+        <div style="margin-top:100px">
+          <router-view @filterParameters="filterParameters"></router-view> 
+        </div>
       </el-drawer>
       </div>
   </div>
@@ -58,17 +60,18 @@ export default class Home extends Vue {
    * 获取子页面toobar的数据,同时新增弹窗页面并打开
    */
   protected getToobars( val: any ) {
-    if(!this.utils.login()){
-      this.$notify.error({title: '错误',message: '请重新登录页面'});
-      return;
-    }
-    this.drawer=true;
-    this.$router.push({ path: '/'+this.$store.state.chineseToEnglish[val.name].name,query:{id: val.id}});
-    const childrenValue = JSON.parse(JSON.stringify(val));
-    this.elements.push({childrenValue});
-    this.utils.setLocal(this.utils.getAuthName(),this.elements);
-    // this.$store.state.nowFilters={};
-    
+    channelList().then(res=>{
+        if(typeof res==='string'){
+            if(res.indexOf('请登录')!=-1){
+              this.$notify.error({title: '错误',message: '请重新登录页面'});
+            }
+        } 
+      })
+      this.drawer=true;
+      this.$router.push({ path: '/'+this.$store.state.chineseToEnglish[val.name].name,query:{id: val.id}});
+      const childrenValue = JSON.parse(JSON.stringify(val));
+      this.elements.push({childrenValue});
+      this.utils.setLocal(this.utils.getAuthName(),this.elements);
   }
 
   /**
@@ -162,10 +165,13 @@ export default class Home extends Vue {
      * 进入主页的时候执行的函数
      */
     created(){
-      if(!this.utils.login()){
-        this.$notify.error({title: '错误',message: '请重新登录页面'});
-        return;
-      }
+      channelList().then(res=>{
+        if(typeof res==='string'){
+            if(res.indexOf('请登录')!=-1){
+              this.$notify.error({title: '错误',message: '请重新登录页面'});
+            }
+        } 
+      })
       if(this.utils.getLocal(this.utils.getAuthName())!=null){
         this.elements=this.utils.getLocal(this.utils.getAuthName());
         this.elements.forEach((item: any,index) => {

@@ -24,7 +24,10 @@
                     </div>    
             </div>
             <keep-alive>
-                <component ref="results" :is="getComponents"></component>
+                <div>
+                    <component ref="results" :is="getComponents"></component>
+                </div>
+                
             </keep-alive>
         </vue-draggable-resizable>
     </div>

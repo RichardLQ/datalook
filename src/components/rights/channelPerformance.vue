@@ -204,4 +204,12 @@ export default class ChannelPerformance extends Vue {
     
 }
 </script>
+<style lang="less" scoped>
+/deep/ .el-input__inner{
+    width:auto;
+}
+/deep/ .el-date-editor--daterange.el-input__inner{
+    width:auto;
+}
+</style>
 

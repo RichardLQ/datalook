@@ -25,9 +25,14 @@ export default {
         }
         },
     methods:{
+        randoms(){
+           return Math.floor(Math.random() * 100 + 1);
+        },
         set(x,y,name,id){
             this.sendHome.pageX=x;
             this.sendHome.pageY=y;
+            this.sendHome.pageX=400+this.randoms();
+            this.sendHome.pageY=200+this.randoms();
             const names=name.split(' ')
             this.sendHome.name=names[1];
             this.sendHome.id=id;
