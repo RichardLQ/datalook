@@ -14,7 +14,14 @@
     </div>
       <template>
         <div>
-            
+          <!-- <el-button type="text" @click="openDialog">dgfdfsgsdf风格不是梵蒂冈地方公司的风格都是法国的发生过的方式告诉对方告诉对方告诉对方打开嵌套表格的 Dialog</el-button>
+            <el-dialog ref="elDialog" title="收货地址" :visible.sync="dialogTableVisible"
+            :modal="false"
+            :modal-append-to-body="true" :close-on-click-modal="false"
+            >
+            fdgf
+          </el-dialog> -->
+
             <draggable ref="draggable" @onActivated="onActivated"  @closeDraggable="closeDraggable" @openDraggable="openDraggable" @onResize="onResize" @onDragStop="onDragStop" :parentValue="item.childrenValue" v-for="(item,index) in elements" :key="index"></draggable>     
         
         </div>
@@ -31,6 +38,7 @@
         :modal-append-to-body="false"
         :show-close="false"
         :wrapperClosable="false"
+       
         >
         <div style="margin-top:20px">
           <router-view @filterParameters="filterParameters"></router-view> 
@@ -46,7 +54,8 @@
 import { Component, Vue  } from 'vue-property-decorator';
 import toobar from "../components/toobars/leftsides"; 
 import draggable from "../components/toobars/draggable.vue";
-import { channelList} from '@/request/api';
+import { channelList, professorList} from '@/request/api';
+import plugin from '@/request/select_plugin';
 @Component({
   components: {toobar,draggable}
 })
@@ -55,11 +64,13 @@ export default class Home extends Vue {
   fixeds=true;//是否浮到最上层
   elements=[];//弹窗数组
   utils: any;
+  dialogTableVisible=true;
   $refs!: {draggable: draggable};
   /**
    * 获取子页面toobar的数据,同时新增弹窗页面并打开
    */
   protected getToobars( val: any ) {
+    console.log(val);
     channelList().then(res=>{
         if(typeof res==='string'){
             if(res.indexOf('请登录')!=-1){
@@ -74,6 +85,13 @@ export default class Home extends Vue {
       this.utils.setLocal(this.utils.getAuthName(),this.elements);
   }
 
+
+  /**
+   * emitDialog
+   */
+  public emitDialog(val) {
+    console.log(val);
+  }
   /**
    * changeFiexd
    */
@@ -191,7 +209,13 @@ export default class Home extends Vue {
      */
     mounted() {
       this.fixeds=false;
-      this.changeFiexd();   
+      this.changeFiexd();  
+      // professorList().then(res => {this.professorList = res.data})
+      // console.log(this.$route.path); 
+      console.log(this.utils.getAuthName());
+      if(this.utils.getLocal(this.utils.getAuthName()+'professorList')==undefined){
+        professorList().then(res => {this.utils.setLocal(this.utils.getAuthName()+'professorList',JSON.stringify(res.data))})
+      }
 		}
 }
 </script>

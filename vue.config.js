@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 module.exports = {
   publicPath: '/public/admin/data_view/',
   chainWebpack: config =>{
@@ -6,4 +7,12 @@ module.exports = {
           return args;
       })
   },
+  configureWebpack:{
+    plugins:[
+      new webpack.ProvidePlugin({
+        jQuery: "jquery",
+        $: "jquery",
+      })
+    ]
+  }
 }

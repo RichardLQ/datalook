@@ -99,5 +99,19 @@ export default class GrouPremium extends Vue {
     
 }
 </script>
+<style lang="less" scoped>
+/deep/ .el-input__inner{
+    width:220px;
+}
+/deep/ .el-date-editor--daterange.el-input__inner{
+    width:220px;
+}
+.el-date-editor--daterange.el-input__inner{
+    width: 220px !important;
+}
+/deep/ .el-input__icon{
+    width: 15px !important;
+}
+</style>
 
 

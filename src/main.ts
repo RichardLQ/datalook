@@ -19,13 +19,14 @@ Vue.use(UmyUi);
 import VueDraggableResizable from 'vue-draggable-resizable'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
-
-
+import '../public/css/select_plugin.css';
+// import jquery from 'jquery';
 Vue.prototype.utils=utils;
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  // jquery,
   render: h => h(App)
 }).$mount('#app')

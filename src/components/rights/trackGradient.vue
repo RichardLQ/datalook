@@ -13,7 +13,7 @@
                 <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
             </el-form-item>
             <el-form-item label="对象" class="label">
-                <el-select filterable placeholder="请选择,可搜索" clearable v-model="form.proid">
+                <!-- <el-select filterable placeholder="请选择,可搜索" clearable v-model="form.proid">
                     <el-option-group v-for="team in professorList" :label="team.title" :key="team.id" >
                         <el-option 
                         v-for="pro in team.children" 
@@ -21,7 +21,8 @@
                         :label="pro.proname"
                         :value="pro.id"></el-option>
                     </el-option-group>
-                </el-select>
+                </el-select> -->
+                <el-input id="proid" v-model="form.proid" @focus="onclissd" clearable></el-input>
             </el-form-item>
             <el-form-item label="时间" class="label" >
                 <el-date-picker type="month" value-format="yyyy-MM" placeholder="选择日期" v-model="form.date_val" style="width: 80%;"></el-date-picker>
@@ -37,6 +38,7 @@
 // @ts-nocheck
 import { Component, Vue,Emit  } from 'vue-property-decorator';
 import { professorList} from '@/request/api';
+import plugin from '@/request/select_plugin';
 @Component({
   components: {}
 })
@@ -58,6 +60,13 @@ export default class TrackGradient extends Vue {
     }
 
     /**
+     * onclissd
+     */
+    public onclissd() {
+        plugin.render($("#proid"), {}, {}, false);
+    }
+
+    /**
      * 全选中方法
      */
     public handleCheckAllChange(val) {
@@ -75,6 +84,7 @@ export default class TrackGradient extends Vue {
      * 确认按钮提交信息
      */
     public confirmOptions(): void {
+        this.form.proid=$('#proid').val();
         const values={
             'data_type':this.form.data_type,
             'date_val':this.form.date_val,
@@ -92,7 +102,7 @@ export default class TrackGradient extends Vue {
         this.filterParameters({'drawer':false});
     }
     created(){
-      professorList().then(res => {this.professorList = res.data})
+    //   professorList().then(res => {this.professorList = res.data})
       if(this.$store.state.nowFilters.trackGradient!=undefined){
           this.form=this.$store.state.nowFilters.trackGradient;
       }

@@ -42,13 +42,13 @@
                             <el-radio-group v-model="form.data_type" @change="changeunit">
                                 <el-radio-button :label="2">规划师</el-radio-button>
                                 <el-radio-button :label="1">客户</el-radio-button>
-                                <el-radio-button :label="3">团队</el-radio-button>
+                                <!-- <el-radio-button :label="3">团队</el-radio-button> -->
                             </el-radio-group>
                         </el-form-item>
                                                 
                         <el-form-item v-if="form.data_type!=1?true:false" label="规划师" class="label" >
-                            <template v-if="form.data_type == 2">
-                                <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
+                            <template v-if="form.data_type == 2||form.data_type == 3">
+                                <!-- <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
                                     <el-option-group v-for="team in professorList"  :label="team.title" :key="team.id" >
                                         <el-option 
                                         v-for="pro in team.children" 
@@ -56,15 +56,17 @@
                                         :label="pro.proname"
                                         :value="pro.id"></el-option>
                                     </el-option-group>
-                                </el-select>
+                                </el-select> -->
+                                <el-input id="proid" v-model="form.proid" @focus="onclissd" clearable></el-input>
                             </template>
-                            <template v-if="form.data_type == 3">
+                            <!-- <template v-if="form.data_type == 3">
                                 <el-select  multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
                                     <template v-for="team in professorList">
                                         <el-option v-if="team.id != 0" :label="team.title" :key="team.id" :value="team.id"></el-option>
                                     </template>
                                 </el-select>
-                            </template>
+                                <el-input id="proid" v-model="form.proid" @focus="onclissd" clearable></el-input>
+                            </template> -->
 
                         </el-form-item>
                         <el-form-item label="购买时间" class="label" >
@@ -107,6 +109,7 @@
 import { Component, Vue,Emit  } from 'vue-property-decorator';
 import { professorList,channelList} from '@/request/api';
 // import { component } from 'vue/types/umd';
+import plugin from '@/request/select_plugin';
 @Component({
   components: {}
 })
@@ -119,8 +122,9 @@ export default class ChannelPerformance extends Vue {
         data_type:2,//业绩单位
         buyDate:'',//购买时间
         singleDate:'',//出单时间\
-        proid:[],
+        proid:'',
     };
+    
     professorList=[];
     channelList=[];
     /**
@@ -134,9 +138,11 @@ export default class ChannelPerformance extends Vue {
     /**
      * 业绩单位发生改变时执行函数
      */
-    public changeunit() {
-        this.form.proid=[];
-
+    public changeunit(val) {
+        // console.log();
+        $('#proid').val('');
+        this.form.proid='';
+        
     }
     /**
      * 确认按钮提交信息
@@ -150,6 +156,7 @@ export default class ChannelPerformance extends Vue {
             console.log(tem);
             names=tem[0].id;
         }
+        this.form.proid=$('#proid').val();
         const values={
             'channel':names,
             // 'channel':(this.form.channel!='')?this.form.channel.substr(1):this.form.channel,
@@ -165,6 +172,12 @@ export default class ChannelPerformance extends Vue {
             };
         this.$store.state.nowFilters.channelPerformance=values;
         this.filterParameters(values);
+    }
+    /**
+     * onclissd
+     */
+    public onclissd() {
+        plugin.render($("#proid"), {}, {}, true);
     }
     /**
      * 关闭抽屉
@@ -206,10 +219,16 @@ export default class ChannelPerformance extends Vue {
 </script>
 <style lang="less" scoped>
 /deep/ .el-input__inner{
-    width:auto;
+    width:220px;
 }
 /deep/ .el-date-editor--daterange.el-input__inner{
-    width:auto;
+    width:220px;
+}
+.el-date-editor--daterange.el-input__inner{
+    width: 220px !important;
+}
+/deep/ .el-input__icon{
+    width: 15px !important;
 }
 </style>
 

@@ -36,7 +36,7 @@ export default {
             const names=name.split(' ')
             this.sendHome.name=names[1];
             this.sendHome.id=id;
-            this.sendHome.zindex=10;
+            this.sendHome.zindex=21;
             
         },
         

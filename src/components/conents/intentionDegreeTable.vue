@@ -88,21 +88,40 @@ import { getProfessorDetail} from '@/request/api';
 })
 export default class IntentionDegreeTable extends Vue {
     testdata=[];
-    heights=400;
+	heights=400;
+	datas=[];
 	loading=false;
 	map={};
     export_url={};
     bigFields=['last','last2','now'];
 	fields=['5min_num','moneys','onum','service','wechat_valid'];
     created(){
-        console.log(222);
+        // console.log(222);
     }
     public getData(): void {
         // const map = {};
         this.loading=true;
 		Object.assign(this.map,this.$store.state.nowFilters.intentionDegree)
+		const professList=this.utils.getLocal(this.utils.getAuthName()+'professorList');
+		if(this.$store.state.nowFilters.intentionDegree.proid!=''&&this.$store.state.nowFilters.intentionDegree.proid!=undefined){
+			const proids=this.$store.state.nowFilters.intentionDegree.proid.split(',');
+			const proidList=[];
+			JSON.parse(professList).forEach(item => {
+				item.children.forEach(item2 => {
+					proids.forEach(element => {
+						if(item2.proname==element){
+							proidList.push(item2.id);
+						}
+					});
+				});
+			});
+			this.map.proid=proidList;
+		}
+		
         getProfessorDetail(this.map).then(res => {
 			this.testdata=res.data;
+			this.datas=res.data;
+			// console.log(this.datas);
 			this.testdata.map(n=>{
 				n.status_countrate=n.count==null?0:((n.status_count/n.count)*100).toFixed(2)+'%';
 				n.code5rate=n.count==null?0:((n.code5/n.count)*100).toFixed(2)+'%';
@@ -127,7 +146,7 @@ export default class IntentionDegreeTable extends Vue {
         const userInfoList=this.utils.getLocal(this.utils.getAuthName());
         const userInfo = userInfoList.filter(n=>{return (n.childrenValue.id==this.map.parentid)?true:false;})
         this.export_url=this.$store.state.export_url[userInfo[0].childrenValue.name];
-        const jsonData = this.utils.formatJson(this.export_url['en'], this.testdata);
+        const jsonData = this.utils.formatJson(this.export_url['en'], this.datas);
         import("../vendor/Export2Excel").then(excel => {
             excel.export_json_to_excel({
 				multiHeader:this.export_url['multiHeader'], 

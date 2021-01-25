@@ -80,7 +80,28 @@ export default class ChannelPerformanceTable extends Vue {
     public getData(): void {
         // const map = {};
         this.loading=true;
-		Object.assign(this.map,this.$store.state.nowFilters.channelPerformance)
+        Object.assign(this.map,this.$store.state.nowFilters.channelPerformance)
+        const professList=this.utils.getLocal(this.utils.getAuthName()+'professorList');
+		if(this.$store.state.nowFilters.channelPerformance.proid!=''&&this.$store.state.nowFilters.channelPerformance.proid!=undefined){
+            console.log(this.$store.state.nowFilters.channelPerformance);
+            const proids=this.$store.state.nowFilters.channelPerformance.proid.split(',');
+			const proidList=[];
+			JSON.parse(professList).forEach(item => {
+                proids.forEach(element => {
+					if(item.proname==element){
+						proidList.push(item.id);
+					}
+				});
+				item.children.forEach(item2 => {
+					proids.forEach(element => {
+						if(item2.proname==element){
+							proidList.push(item2.id);
+						}
+					});
+				});
+			});
+			this.map.proid=proidList;
+		}
         getChannelData(this.map).then(res => {
             this.testdata=res.data;
 			this.loading=false;

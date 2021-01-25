@@ -119,15 +119,20 @@ export default class OneDayTable extends Vue {
     fieldText={'durations':'(通话时长)','total':'(通话次数)','5min_num':'(通话超过 5min次数)'}
     
     public getData(): void {
-		// console.log(this.$store.state.nowFilters);
-		// console.log(22);
         if(this.$store.state.nowFilters.oneDay.proid==undefined||this.$store.state.nowFilters.oneDay.proid==""){
             this.$message({message: '请选择老师对象',type: 'warning'});
             return ;
 		}
-        // const map = {};
-        this.loading=true;
+		this.loading=true;
 		Object.assign(this.map,this.$store.state.nowFilters.oneDay)
+		const professList=this.utils.getLocal(this.utils.getAuthName()+'professorList');
+		JSON.parse(professList).forEach(item => {
+			item.children.forEach(item2 => {
+				if(item2.proname==this.$store.state.nowFilters.oneDay.proid){
+					this.map.proid=item2.id;
+				}
+			});
+		});
         getProfessorData(this.map).then(res => {
 			this.exportData=res.data.list;
             this.testdata=this.formatting(res.data.list);

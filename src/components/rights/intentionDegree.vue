@@ -3,7 +3,7 @@
         <el-form  :model="form" ref="form" label-width="80px">                    
             <el-form-item label="专家" class="label" >
                 <template>
-                    <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
+                    <!-- <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
                         <el-option-group v-for="team in professorList"  :label="team.title" :key="team.id" >
                             <el-option 
                             v-for="pro in team.children" 
@@ -11,7 +11,8 @@
                             :label="pro.proname"
                             :value="pro.id"></el-option>
                         </el-option-group>
-                    </el-select>
+                    </el-select> -->
+                    <el-input id="proid" v-model="form.proid" @focus="onclissd" clearable></el-input>
                 </template>
             </el-form-item>
             <el-form-item label="购买时间" class="label" >
@@ -43,6 +44,7 @@
 // @ts-nocheck
 import { Component, Vue,Emit  } from 'vue-property-decorator';
 import { professorList} from '@/request/api';
+import plugin from '@/request/select_plugin';
 @Component({
   components: {}
 })
@@ -61,18 +63,22 @@ export default class IntentionDegree extends Vue {
         return val;
     }
     /**
+     * onclissd
+     */
+    public onclissd() {
+        plugin.render($("#proid"), {}, {}, true);
+    }
+    /**
      * 确认按钮提交信息
      */
     public confirmOptions(): void {
-        
+        this.form.proid=$('#proid').val();
         const values={
             'dates':this.form.dates,
             'proid':this.form.proid,
             'parentid':this.$route.query.id,
             'drawer':true
             };
-            console.log(this.form.dates);
-            
         // this.$store.state.nowFilters=values;getNowdates   this.utils.getAuthName()
         this.$store.state.nowFilters.intentionDegree=values;
         this.filterParameters(values);
@@ -84,7 +90,7 @@ export default class IntentionDegree extends Vue {
         this.filterParameters({'drawer':false});
     }
     created(){
-      professorList().then(res => {this.professorList = res.data})
+    //   professorList().then(res => {this.professorList = res.data})
       if(this.$store.state.nowFilters.intentionDegree!=undefined){
           this.form=this.$store.state.nowFilters.intentionDegree;
       }
@@ -99,3 +105,8 @@ export default class IntentionDegree extends Vue {
     
 }
 </script>
+<style lang="less" scoped>
+.el-date-editor--daterange.el-input__inner{
+    width: 220px !important;
+}
+</style>

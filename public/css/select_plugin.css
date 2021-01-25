@@ -1,0 +1,223 @@
+.plugin-main *{
+    font-size: 14px;
+    /* min-width: 730px; */
+}
+.plugin-main input{  
+    background:none;  
+    outline:none;  
+    border:1px solid #ccc;
+}
+.plugin-main input:focus{   
+    border:1px solid #ccc;
+}
+.plugin-main .btn-group button{
+    border: 0;
+    background-color: transparent;
+    outline: none;
+}
+.plugin-main{
+    border-radius: 10px;
+    background-color: #fff;
+    border:1px solid #ccc;
+    margin:10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.9);
+    width: auto;
+    position: absolute;
+    display: none;
+    top:50px;
+    right:0;
+    padding: 20px;
+    z-index: 9999;
+    min-width: 800px;
+}
+.plugin-main .content{
+    margin: 0 auto;
+}
+.plugin-main .search{
+    padding: 5px;
+    height: 30px;
+    margin: 10px auto;
+}
+.plugin-main .search input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 5px;
+}
+.plugin-main .tab{
+    height: 35px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+}
+.plugin-main .tab .lab{
+    display: inline-block;
+    border: 2px solid #ccc;
+    width: 50%;
+    height: 35px;
+    line-height: 35px;
+    cursor:pointer;
+}
+.plugin-main .tab .lab-left{
+    color: #888;
+    font-weight: 600;
+    border-right: 0px;
+    border-radius: 20px 0 0 20px;
+}
+.plugin-main .tab .lab-right{
+    color: #888;
+    font-weight: 600;
+    border-radius: 0 20px 20px 0;
+}
+.plugin-main .tab .active{
+    border: 2px solid #5595ff;
+    color: #4088ff;
+    font-weight: 600;
+}
+
+.plugin-main .list{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 350px;
+    overflow-y: auto;
+}
+.plugin-main .list .team{
+    min-width: 104px;
+    margin: 0px auto;
+    padding: 5px;
+}
+.plugin-main .list .team label{
+    margin: 10px 0px;
+    display: flex !important;
+    align-items: center;
+}
+.plugin-main input[type=checkbox]{
+    position: relative;
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none;
+    /* visibility: hidden; */
+    cursor: pointer;
+    margin:0;
+    margin-right: 5px;
+    height: 14px;
+    width: 14px;
+    outline:none;
+}
+/* 鏈€変腑鐘舵€� */
+.plugin-main input[type=checkbox]:before{
+    display: inline-block;
+    font-family:"iconfont" !important;
+    content: ''; 
+    color:#999999;
+    font-size:14px;
+    width: 14px;
+    height: 14px;
+    padding-top: 0px;
+    padding-right: 0px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+}
+/* 閫変腑鏃� */
+.plugin-main input[type=checkbox]:checked:before{
+    position: absolute;
+    top: -4px;
+    display: inline-block;
+    font-family:"iconfont" !important;
+    content:'\2714';
+    color: #4088ff;
+    /* color:@mainColor; */
+    font-size:14px;
+    width: 14px;
+    height: 14px;
+    padding-top: 0px;
+    padding-right: 0px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+}
+
+.plugin-main .show{
+    display: block;
+}
+.plugin-main .hidden{
+    display: none;
+}
+.plugin-main .list .team .frist{
+    font-weight: 700;
+}
+/* 鎸夐挳 style start */
+.plugin-main .btn-group{
+    margin-top:15px;
+    text-align: center;
+    position: relative;bottom:10%;
+    display:flex;
+    justify-content: center;
+}
+.plugin-main .btn-group button{
+    margin:5px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+.plugin-main .btn-group .confirm{
+    padding: 8px 15px;
+    border-radius: 5px;
+    color:#fff;
+    background-color: #1586c8;
+}
+.plugin-main .btn-group .close{
+    border: 2px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color:#666;
+    background-color: #f3f3f3;
+}
+.plugin-main .btn-group .clear{
+    margin: 0px;
+    border-radius: 5px;
+    color:#1586c8;
+    font-weight: 700;
+    font-size: 15px;
+}
+/* 鎸夐挳 style end */
+/* 閬僵灞� */
+.mask{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    background-color: rgb(0, 0, 0);
+    opacity:0.3;
+    display: none;
+}
+.level-btn{
+    height: 30px; 
+    background: #ccc; 
+    color: #fff; 
+    cursor: pointer;
+    border: 0;
+    /* background-color: transparent; */
+    outline: none;
+    padding:5px 1%
+}
+.level-active{
+    background-color:#1586c8;
+}
+.layui-bg-gray{
+    background-color: #ccc !important;
+}
+.layui-badge-dot{
+    display: none;
+}
+.layui-bg-green{
+    background-color: #25b54d !important;
+}

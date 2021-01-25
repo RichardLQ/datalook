@@ -64,9 +64,9 @@ const routes: Array<RouteConfig> = [
      component: Home,
    },
    {
-    path: '/result/data',
+    path: '/index/',
      name: 'Home',
-     component: oneDay,
+     component: Home,
    },
    
   // {
@@ -80,7 +80,7 @@ const routes: Array<RouteConfig> = [
 ]
 
 const router = new VueRouter({
-  // mode: 'history',
+  /// mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

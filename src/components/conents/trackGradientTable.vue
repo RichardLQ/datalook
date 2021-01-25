@@ -146,6 +146,14 @@ export default class TrackGradientTable extends Vue {
         // const map = {};
         this.loading=true;
 		Object.assign(this.map,this.$store.state.nowFilters.trackGradient)
+		const professList=this.utils.getLocal(this.utils.getAuthName()+'professorList');
+		JSON.parse(professList).forEach(item => {
+			item.children.forEach(item2 => {
+				if(item2.proname==this.$store.state.nowFilters.trackGradient.proid){
+					this.map.proid=item2.id;
+				}
+			});
+		});
         getProRecordData(this.map).then(res => {
 			this.exportData=res.data;
             this.testdata=this.formatData(res.data);

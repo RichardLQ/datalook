@@ -17,7 +17,7 @@
                             </el-radio-group>
                         </el-form-item>
                         <el-form-item label="对象" class="label">
-                            <el-select filterable placeholder="请选择,可搜索" v-model="form.proid" clearable>
+                            <!-- <el-select filterable placeholder="请选择,可搜索" v-model="form.proid" clearable>
                                 <el-option-group v-for="team in professorList"  :label="team.title" :key="team.id" >
                                     <el-option 
                                     v-for="pro in team.children" 
@@ -25,23 +25,32 @@
                                     :label="pro.proname"
                                     :value="pro.id"></el-option>
                                 </el-option-group>
-                            </el-select>
+                            </el-select> -->
+                            <el-input id="proid" v-model="form.proid" @focus="onclissd" clearable></el-input>
                         </el-form-item>
+                          
                         <el-form-item>
                             <el-button type="primary" size="small" @click="confirmOptions">确认</el-button>
                             <el-button type="danger" size="small" @click="close">关闭</el-button>
                         </el-form-item>
                     </el-form>
+                    
     </div>
 </template>
+
 <script lang="ts">
 // @ts-nocheck
 import { Component, Vue,Emit  } from 'vue-property-decorator';
 import { professorList} from '@/request/api';
+// import $ from 'jquery';
+import plugin from '@/request/select_plugin';
+
 @Component({
   components: {}
 })
 export default class OneDay extends Vue {
+    
+    visible=false;
     form={
         data_type:[1],//空间
          show_type:1,//字段
@@ -49,6 +58,16 @@ export default class OneDay extends Vue {
     };
     parent='';
     professorList=[];
+    /**
+     * onclissd
+     */
+    public onclissd() {
+        console.log(plugin);
+        plugin.render($("#proid"), {}, {}, false);
+    }
+
+    
+
     /**
      * 传form里面的参数到home组件内
      */
@@ -60,6 +79,7 @@ export default class OneDay extends Vue {
      * 确认按钮提交信息
      */
     public confirmOptions(): void {
+        this.form.proid=$('#proid').val();
         const values={
             'data_type':this.form.data_type,
             'show_type':this.form.show_type,
@@ -69,6 +89,7 @@ export default class OneDay extends Vue {
             };
         this.$store.state.nowFilters.oneDay=values;
         this.filterParameters(values);
+        
     }
     /**
      * 关闭抽屉
@@ -78,7 +99,6 @@ export default class OneDay extends Vue {
     }
 
     created(){
-      professorList().then(res => {this.professorList = res.data})
       if(this.$store.state.nowFilters.oneDay!=undefined){
           this.form=this.$store.state.nowFilters.oneDay;
       }
