@@ -34,4 +34,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Example picture
-  ![image text](./tests/unit/1610775411.jpg)
+  ![image text](https://github.com/RichardLQ/datalook/blob/master/tests/unit/1610775411.jpg)
