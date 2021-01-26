@@ -4,6 +4,7 @@ var global_dom;
 var is_first=true;
 var tab_index=0;
 var isjob=1;
+var global_selected='';
 var on_the_job_list=[];//在职专家
 var not_on_the_job_list=[];//不在职专家
 var global_where={};
@@ -11,7 +12,7 @@ var global_is_multiple=true;
 
 var plugin={
     render:function(dom,where={},css,is_multiple=true,param=null){
-        
+        // console.log(param);
         global_is_multiple=is_multiple;
         global_dom=dom;
         global_where=where;
@@ -39,7 +40,11 @@ var plugin={
             html+="    </div>";
             html+=" </div>";
         }
-        
+        if(param==null){
+            param.datas='';
+        }else{
+            global_selected=param.datas;
+        }
         html+="        <div class='list'>";
         html+="           数据加载中...";
         html+="        </div>";
@@ -93,6 +98,7 @@ var plugin={
                 showStateRender(selected_val_number,select_val_string);
             })
         }
+        // console.log(global_selected);
         requestAjax(function(data){
             list=data;
             console.log(list);
@@ -367,8 +373,27 @@ function renderDoom(list){
         });
         monitorSelect(this);
     })
+    // console.log(global_selected);
+    // console.log(global_is_multiple);
+    if(global_is_multiple){
+        console.log(global_selected);
+        if(global_selected!=''){
+            var temps=global_selected.split(',');
+            temps.forEach(items=>{
+                var temDom=$('input[data-name="'+items+'"]')[0];
+                $(temDom).prop('checked',true)
+                monitorSelect($('input[data-name="'+items+'"]')[0]);
+            })
+        }
+    }else{
+        var temDom=$('input[data-name="'+global_selected+'"]')[0];
+        $(temDom).prop('checked',true)
+        monitorSelect($('input[data-name="'+global_selected+'"]')[0]);
+    }
     //监听选中
     $(".plugin-main .list").find('input[name=proid]').on('click',function(){
+        console.log(this);
+        
        monitorSelect(this);
     })
 
@@ -403,8 +428,8 @@ function renderDoom(list){
 }
 function monitorSelect(that){
     var num=0;
+    console.log(that);
     $("input[name=proid]").each(function(){
-        console.log(1);
         if($(this).prop('checked') && $(this).css('display')!='none'){
             num++;
         }

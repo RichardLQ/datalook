@@ -124,7 +124,9 @@ export default class ChannelPerformance extends Vue {
         singleDate:'',//出单时间\
         proid:'',
     };
-    
+    param={
+        datas:''
+    };
     professorList=[];
     channelList=[];
     /**
@@ -177,7 +179,9 @@ export default class ChannelPerformance extends Vue {
      * onclissd
      */
     public onclissd() {
-        plugin.render($("#proid"), {}, {}, true);
+        this.param.datas=this.form.proid;
+        // console.log();
+        plugin.render($("#proid"), {}, {}, true,this.param);
     }
     /**
      * 关闭抽屉
@@ -229,6 +233,9 @@ export default class ChannelPerformance extends Vue {
 }
 /deep/ .el-input__icon{
     width: 15px !important;
+}
+/deep/ .el-input{
+    width: auto;
 }
 </style>
 

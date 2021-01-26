@@ -57,13 +57,18 @@ export default class OneDay extends Vue {
          proid:'',//对象
     };
     parent='';
+    param={
+        datas:''
+    };
     professorList=[];
     /**
      * onclissd
      */
     public onclissd() {
-        console.log(plugin);
-        plugin.render($("#proid"), {}, {}, false);
+        this.param.datas=this.form.proid;
+        console.log(this.form.proid);
+        console.log(this.param.datas);
+        plugin.render($("#proid"), {}, {}, false,this.param);
     }
 
     
@@ -107,4 +112,13 @@ export default class OneDay extends Vue {
     
 }
 </script>
+<style lang="less" scoped>
+/deep/ .el-input__inner{
+    width: auto;
+}
+
+/deep/ .el-input{
+    width: auto;
+}
+</style>
 

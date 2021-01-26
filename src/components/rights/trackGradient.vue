@@ -50,6 +50,9 @@ export default class TrackGradient extends Vue {
         date_val:'',//时间
         proid:'',
     };
+    param={
+        datas:''
+    };
     professorList=[];
     /**
      * 传form里面的参数到home组件内
@@ -63,7 +66,7 @@ export default class TrackGradient extends Vue {
      * onclissd
      */
     public onclissd() {
-        plugin.render($("#proid"), {}, {}, false);
+        plugin.render($("#proid"), {}, {}, false,this.param);
     }
 
     /**
@@ -111,3 +114,11 @@ export default class TrackGradient extends Vue {
     
 }
 </script>
+<style lang="less" scoped>
+/deep/ .el-input__inner{
+    width: auto;
+}
+/deep/ .el-input{
+    width: auto;
+}
+</style>

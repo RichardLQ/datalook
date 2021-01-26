@@ -54,6 +54,9 @@ export default class IntentionDegree extends Vue {
         dates:[],//时间
         proid:[],
     };
+    param={
+        datas:''
+    };
     professorList=[];
     /**
      * 传form里面的参数到home组件内
@@ -66,7 +69,8 @@ export default class IntentionDegree extends Vue {
      * onclissd
      */
     public onclissd() {
-        plugin.render($("#proid"), {}, {}, true);
+        this.param.datas=this.form.proid;
+        plugin.render($("#proid"), {}, {}, true,this.param);
     }
     /**
      * 确认按钮提交信息
@@ -108,5 +112,11 @@ export default class IntentionDegree extends Vue {
 <style lang="less" scoped>
 .el-date-editor--daterange.el-input__inner{
     width: 220px !important;
+}
+/deep/ .el-input__inner{
+    width: auto;
+}
+/deep/ .el-input{
+    width: auto;
 }
 </style>
