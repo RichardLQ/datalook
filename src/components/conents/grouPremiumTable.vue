@@ -14,7 +14,7 @@
 				</u-table-column>
 				<u-table-column
 					prop="num" :sortable="true"
-					label="群总数"
+					label="群人数"
 					>
 				</u-table-column>
 				
@@ -22,6 +22,12 @@
 					prop="mem"
 					:sortable="true"
 					label="购买人数"
+					>
+				</u-table-column>
+                <u-table-column
+					prop="order_user_num"
+					:sortable="true"
+					label="出单人数"
 					>
 				</u-table-column>
 				<u-table-column
@@ -89,6 +95,7 @@ export default class GrouPremiumTable extends Vue {
         const userInfo = userInfoList.filter(n=>{return (n.childrenValue.id==this.map.parentid)?true:false;})
         this.export_url=this.$store.state.export_url[userInfo[0].childrenValue.name];
         const jsonData = this.utils.formatJson(this.export_url['en'], this.testdata);
+        console.log(jsonData)
         import("../vendor/Export2Excel").then(excel => {
             excel.export_json_to_excel({
                 header:this.export_url['zh'],
@@ -114,30 +121,43 @@ export default class GrouPremiumTable extends Vue {
 	public summaryMethod({ columns, data }) {
            const means: string[] = [] // 合计
            columns.forEach((column, columnIndex) => {
-               if (columnIndex === 0) {
-                   means.push('合计')
-               } else {
+            //    if (columnIndex === 0) {
+            //        means.push('合计')
+            //    } else {
                    const values = data.map(item => Number(item[column.property]));
                    // 合计
-                   if (!values.every(value => isNaN(value))) {
+                   console.log(data.length);
+                //    if (!values.every(value => isNaN(value))) {
                        means[columnIndex] = values.reduce((prev, curr) => {
+                          
                            const value = Number(curr);
                            if (!isNaN(value)) {
                                return prev + curr;
                            } else {
                                return prev;
+                            //    return 1;
                            }
                        }, 0);
                        let footers='元';
+                    //    console.log(columnIndex)
+                       if(columnIndex==0){
+                            footers='合计';
+                            means[columnIndex] ='总计: '+data.length;
+                        }
                         if(columnIndex==2||columnIndex==3){
                             footers='个';
+                            means[columnIndex] =means[columnIndex].toFixed(2) + footers
                         }
-                       means[columnIndex] =means[columnIndex].toFixed(2) + footers
-                   } else {
-                       means[columnIndex] = '';
-                   }
+                        if(columnIndex==4){
+                            footers='人';
+                            means[columnIndex] =means[columnIndex].toFixed(2) + footers
+                        }
+                       
+                //    } else {
+                //        means[columnIndex] = '';
+                //    }
                    
-               }
+            //    }
            })
            // 返回一个二维数组的表尾合计(不要平均值，你就不要在数组中添加)
            return [means];

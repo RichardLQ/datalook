@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-form ref="form" :model="form" label-width="80px" @submit.native.prevent>
+    <div @keyup.enter="confirmOptions">
+        <el-form ref="form" @keyup.enter.native="confirmOptions" :model="form" label-width="80px" @submit.native.prevent>
 
                         <el-form-item label="渠道" >
                             <el-select v-model="form.channel" filterable clearable  placeholder="请选择">
@@ -24,7 +24,7 @@
                         </el-form-item>
 
                         <el-form-item label="价格" class="label">
-                            <el-input
+                            <el-input autofocus
                             placeholder="请输入内容"
                             v-model="form.fee"
                             clearable>

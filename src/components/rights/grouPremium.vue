@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-form :model="form" ref="form" label-width="80px" @submit.native.prevent>
+    <div >
+        <el-form :model="form"  ref="form" @keyup.enter.native="confirmOptions" label-width="80px" @submit.native.prevent>
                         <el-form-item label="类型" class="label" >
                             <el-radio-group v-model="form.isnot" >
                                 <el-radio-button :label="1" >包含</el-radio-button>
@@ -12,7 +12,7 @@
 
                         <el-form-item label="群名称" class="label" >
                             <template>
-                                <el-input v-model="form.title" clearable></el-input>
+                                <el-input  autofocus v-model="form.title" clearable></el-input>
                             </template>
                         </el-form-item>
 
@@ -23,7 +23,7 @@
                         </el-form-item>
                         
                         <el-form-item label="建群时间" class="label" >
-                            <el-date-picker
+                            <el-date-picker 
                             v-model="form.date"
                             type="daterange"
                             range-separator="~"

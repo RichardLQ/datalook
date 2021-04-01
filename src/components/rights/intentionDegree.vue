@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-form  :model="form" ref="form" label-width="80px">                    
-            <el-form-item label="专家" class="label" >
+            <el-form-item label="专家" @keyup.enter.native="confirmOptions" class="label" >
                 <template>
                     <!-- <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
                         <el-option-group v-for="team in professorList"  :label="team.title" :key="team.id" >

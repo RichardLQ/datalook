@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form :model="form" ref="form" label-width="80px" @submit.native.prevent>
+        <el-form :model="form" @keyup.enter.native="confirmOptions" ref="form" label-width="80px" @submit.native.prevent>
         <div style="width:100%;height:10px"></div>
         <el-form-item label="空间" class="label">
             <el-radio-group v-model="form.data_type" >

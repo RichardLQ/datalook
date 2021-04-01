@@ -27,8 +27,8 @@
                 <div>
                     <component ref="results" :is="getComponents"></component>
                 </div>
-                
             </keep-alive>
+            <div class="drag-handle btns" style="height:10px"></div>
         </vue-draggable-resizable>
     </div>
 </template>

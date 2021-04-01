@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form :model="form" ref="form" label-width="80px" @submit.native.prevent>
+        <el-form :model="form" ref="form" @keyup.enter.native="confirmOptions" label-width="80px" @submit.native.prevent>
             <el-form-item label="空间" class="label" >
                 <el-checkbox-group v-model="form.data_type" @change="handleCheckedCitiesChange">
                     <el-checkbox :label="1">A:服务量</el-checkbox>

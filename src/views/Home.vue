@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" >
     <div class="product">
         <div ref="lefts" class="left">
           <toobar @getToobars="getToobars" :key="key"></toobar>
@@ -74,7 +74,8 @@ export default class Home extends Vue {
     channelList().then(res=>{
         if(typeof res==='string'){
             if(res.indexOf('请登录')!=-1){
-              this.$notify.error({title: '错误',message: '请重新登录页面'});
+              window.location.href='https://wx1.dahe2016.com/public/admin/login/login5?typeUrl=https://wx1.dahe2016.com/public/admin/data_view/?times='+Date.parse(new Date());
+              // this.$notify.error({title: '错误',message: '请重新登录页面'});
             }
         } 
       })
@@ -186,7 +187,8 @@ export default class Home extends Vue {
       channelList().then(res=>{
         if(typeof res==='string'){
             if(res.indexOf('请登录')!=-1){
-              this.$notify.error({title: '错误',message: '请重新登录页面'});
+              // this.$notify.error({title: '错误',message: '请重新登录页面'});
+              window.location.href='https://wx1.dahe2016.com/public/admin/login/login5?typeUrl=https://wx1.dahe2016.com/public/admin/data_view/?times='+Date.parse(new Date());
             }
         } 
       })
@@ -210,9 +212,10 @@ export default class Home extends Vue {
     mounted() {
       this.fixeds=false;
       this.changeFiexd();  
+      // console.log(222);
       // professorList().then(res => {this.professorList = res.data})
       // console.log(this.$route.path); 
-      console.log(this.utils.getAuthName());
+      // console.log(this.utils.getAuthName());
       if(this.utils.getLocal(this.utils.getAuthName()+'professorList')==undefined){
         professorList().then(res => {this.utils.setLocal(this.utils.getAuthName()+'professorList',JSON.stringify(res.data))})
       }
