@@ -45,9 +45,9 @@
                                 <!-- <el-radio-button :label="3">团队</el-radio-button> -->
                             </el-radio-group>
                         </el-form-item>
-                                                
-                        <el-form-item v-if="form.data_type!=1?true:false" label="规划师" class="label" >
-                            <template v-if="form.data_type == 2||form.data_type == 3">
+                                                <!-- v-if="form.data_type!=1?true:false"  -->
+                        <el-form-item label="规划师" class="label" >
+                            <template v-if="form.data_type == 2||form.data_type == 3||form.data_type == 1">
                                 <!-- <el-select filterable multiple  placeholder="请选择,可搜索,可多选" v-model="form.proid">
                                     <el-option-group v-for="team in professorList"  :label="team.title" :key="team.id" >
                                         <el-option 

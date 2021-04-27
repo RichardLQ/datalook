@@ -158,10 +158,15 @@ export default class ChannelPerformanceTable extends Vue {
 		this.export_url=this.$store.state.export_url[userInfo[0].childrenValue.name];
 		const old_data1=this.testdata.map(function(n){ n['moneys']=parseFloat(n['moneys']);return n;});
         const jsonData = this.utils.formatJson(this.export_url['en'], old_data1);
+		const jsonData1 = jsonData.map(item=> {
+			item[7] = item[7].replaceAll(',', "\n")
+			return item
+		})
+		// console.log(jsonData)
         import("../vendor/Export2Excel").then(excel => {
             excel.export_json_to_excel({
                 header:this.export_url['zh'],
-                data:jsonData, 
+                data:jsonData1, 
                 filename:this.export_url['filename']
             })
         })

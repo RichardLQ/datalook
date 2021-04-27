@@ -66,8 +66,8 @@ export default new Vuex.Store({
           },
           '渠道业绩查看面板':{
               url:'getChannelData',
-              zh:['客户昵称', '客户名字', '购买时间', '出单金额', '出单数量', '最近出单时间', '专家名称'],
-              en:['nickname', 'name', 'buytime', 'moneys', 'onum','time','proname'],
+              zh:['客户昵称', '客户名字', '购买时间', '出单金额', '出单数量', '最近出单时间', '专家名称','产品名称'],
+              en:['nickname', 'name', 'buytime', 'moneys', 'onum','time','proname','products'],
               filename:'渠道业绩查看面板'
           },
           '方案发送面板':{
